@@ -24,7 +24,3 @@ class QuantityMeasurementProblem:
         else:
             raise QuantityMeasurementException("Not Equal")
 
-
-length = QuantityMeasurementProblem.quantity_measurement(1, 12)
-print(length)
-
