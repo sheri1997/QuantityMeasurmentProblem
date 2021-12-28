@@ -5,7 +5,7 @@ from QuantityMeasurmentException import QuantityMeasurementException
 
 class TestQuantitymeasurmentProblem:
     @pytest.fixture()
-    def _test_quantity_measurment(self):
+    def test_quantity_measurment(self):
         self.length = QuantityMeasurementProblem()
 
     @staticmethod
@@ -16,4 +16,10 @@ class TestQuantitymeasurmentProblem:
             length1 == length2
         assert exe.value.message == 'Null'
 
-    
+    @staticmethod
+    def test_reference_check():
+        with pytest.raises(QuantityMeasurementException) as exe:
+            ref1 = QuantityMeasurementProblem(1)
+            ref2 = QuantityMeasurementProblem(2)
+            ref1 != ref2
+        assert exe.value.message == 'References are not Equal'

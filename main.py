@@ -10,6 +10,8 @@ class QuantityMeasurementProblem:
     def __eq__(self, other):
         if other.length is None:
             raise QuantityMeasurementException('Null')
+        elif other.length != self.length:
+            raise QuantityMeasurementException('References are not Equal')
         elif other.length > 0:
             return other.length * 12
         else:
