@@ -4,10 +4,16 @@ from QuantityMeasurmentException import QuantityMeasurementException
 
 
 class TestQuantitymeasurmentProblem:
-    @staticmethod
     @pytest.fixture()
-    def test_zero_feet():
-        expected = True
-        actual = QuantityMeasurementProblem.quantity_measurement(0, 0)
-        assert actual == expected
-        
+    def _test_quantity_measurment(self):
+        self.length = QuantityMeasurementProblem()
+
+    @staticmethod
+    def test_null_check():
+        with pytest.raises(QuantityMeasurementException) as exe:
+            length1 = QuantityMeasurementProblem(0)
+            length2 = QuantityMeasurementProblem(None)
+            length1 == length2
+        assert exe.value.message == 'Null'
+
+    
