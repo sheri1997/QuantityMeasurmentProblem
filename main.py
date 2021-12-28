@@ -7,20 +7,11 @@ class QuantityMeasurementProblem:
     def __init__(self, length):
         self.length = length
 
-    @staticmethod
-    def length_equal(feat, inches):
-        if feat == 1 and inches == 12:
-            return True
-        elif feat == 0 and inches == 0:
-            return True
+    def __eq__(self, other):
+        if other.length is None:
+            raise QuantityMeasurementException('Null')
+        elif other.length > 0:
+            return other.length * 12
         else:
-            return False
-
-    @staticmethod
-    def quantity_measurement(feat, inches):
-        equal = QuantityMeasurementProblem.length_equal(feat, inches)
-        if equal:
-            print("Equal Length")
-        else:
-            raise QuantityMeasurementException("Not Equal")
+            raise QuantityMeasurementException('Length is Invalid')
 
