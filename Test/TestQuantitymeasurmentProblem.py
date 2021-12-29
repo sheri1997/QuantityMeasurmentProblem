@@ -17,8 +17,8 @@ class TestQuantitymeasurmentProblem:
         with pytest.raises(QuantityMeasurementException) as exe:
             quantity1 == quantity2
         assert exe.value.message == 'Type Not Equal'
-git 
-    @pytest.mark.parametrize('length1, unit1, length2, unit2', [0, 'feet', 2, 'inches'])
+
+    @pytest.mark.parametrize('length1, unit1, length2, unit2', [0, 'feet', 2, 'yard'])
     def test_reference_check(self, length1, unit1, length2, unit2):
         quantity1 = QuantityMeasurementProblem(length1, unit1)
         quantity2 = QuantityMeasurementProblem(length2, unit2)
@@ -26,7 +26,7 @@ git
             quantity1 == quantity2
         assert exe.value.message == 'References are not Equal'
 
-    @pytest.mark.parametrize('length1, unit1 , length2, unit2', [0, 'feet', "hello", 'inch'])
+    @pytest.mark.parametrize('length1, unit1 , length2, unit2', [0, 'feet', "hello", 'yard'])
     def test_type_check(self, length1, unit1, length2, unit2):
         quantity1 = QuantityMeasurementProblem(length1, unit1)
         quantity2 = QuantityMeasurementProblem(length2, unit2)
@@ -34,7 +34,7 @@ git
             quantity1 == quantity2
         assert exe.value.message == 'Type Not Equal'
 
-    @pytest.mark.parametrize('length1 ,unit1, length2, unit2', [0, 'feet', 0, 'inch'])
+    @pytest.mark.parametrize('length1 ,unit1, length2, unit2', [0, 'feet', 0, 'yard'])
     def test_value_check(self, length1, unit1, length2, unit2):
         quantity1 = QuantityMeasurementProblem(length1, unit1)
         quantity2 = QuantityMeasurementProblem(length2, unit2)

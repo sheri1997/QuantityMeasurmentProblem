@@ -6,20 +6,20 @@ from QuantityMeasurmentException import QuantityMeasurementException
 class QuantityMeasurementProblem:
     def __init__(self, length, unit):
         self.length = length
-        self.unit= unit
+        self.unit = unit
 
     @staticmethod
     def feat_fun():
-        FEET = 1
+        FEET = 3
         return FEET
 
     @staticmethod
-    def inch_fun():
-        INCH = 12
-        return INCH
+    def yard_fun():
+        YARD = 1
+        return YARD
 
     def __eq__(self, other):
-        inch = QuantityMeasurementProblem.inch_fun()
+        yard = QuantityMeasurementProblem.yard_fun()
         feat = QuantityMeasurementProblem.feat_fun()
         if other.length is None:
             raise QuantityMeasurementException('Null')
@@ -31,7 +31,6 @@ class QuantityMeasurementProblem:
         elif self.length != other.length:
             raise QuantityMeasurementException('References are not Equal')
         elif other.length > 0:
-            return other.length * 12
+            return other.length / 3
         else:
             raise QuantityMeasurementException("Invalid")
-
