@@ -17,7 +17,7 @@ class TestQuantitymeasurmentProblem:
         with pytest.raises(QuantityMeasurementException) as exe:
             quantity1 == quantity2
         assert exe.value.message == 'Type Not Equal'
-git 
+        
     @pytest.mark.parametrize('length1, unit1, length2, unit2', [0, 'feet', 2, 'inches'])
     def test_reference_check(self, length1, unit1, length2, unit2):
         quantity1 = QuantityMeasurementProblem(length1, unit1)
