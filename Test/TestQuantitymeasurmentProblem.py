@@ -4,30 +4,40 @@ from QuantityMeasurmentException import QuantityMeasurementException
 
 
 class TestQuantitymeasurmentProblem:
-    @pytest.fixture()
-    def test_quantity_measurment(self):
-        self.length = QuantityMeasurementProblem()
+    @pytest.mark.parametrize('length1, unit1, length2, unit2', [0, "feat", 0, "feat"])
+    def test_zero_value_check(self, length1, unit1, length2, unit2):
+        quantity1 = QuantityMeasurementProblem(length1, unit1)
+        quantity2 = QuantityMeasurementProblem(length2, unit2)
+        assert quantity1 == quantity2
 
-    @staticmethod
-    def test_null_check():
+    @pytest.mark.parametrize('length1, unit1, length2, unit2', [None, "feet", None, "feet"])
+    def test_null_reference_check(self, length1, unit1, length2, unit2):
+        quantity1 = QuantityMeasurementProblem(length1, unit1)
+        quantity2 = QuantityMeasurementProblem(length2, unit2)
         with pytest.raises(QuantityMeasurementException) as exe:
-            length1 = QuantityMeasurementProblem(0)
-            length2 = QuantityMeasurementProblem(None)
-            length1 == length2
-        assert exe.value.message == 'Null'
-
-    @staticmethod
-    def test_reference_check():
+            quantity1 == quantity2
+        assert exe.value.message == 'Type Not Equal'
+git 
+    @pytest.mark.parametrize('length1, unit1, length2, unit2', [0, 'feet', 2, 'inches'])
+    def test_reference_check(self, length1, unit1, length2, unit2):
+        quantity1 = QuantityMeasurementProblem(length1, unit1)
+        quantity2 = QuantityMeasurementProblem(length2, unit2)
         with pytest.raises(QuantityMeasurementException) as exe:
-            ref1 = QuantityMeasurementProblem(1)
-            ref2 = QuantityMeasurementProblem(2)
-            ref1 != ref2
+            quantity1 == quantity2
         assert exe.value.message == 'References are not Equal'
 
-    @staticmethod
-    def test_type_check():
+    @pytest.mark.parametrize('length1, unit1 , length2, unit2', [0, 'feet', "hello", 'inch'])
+    def test_type_check(self, length1, unit1, length2, unit2):
+        quantity1 = QuantityMeasurementProblem(length1, unit1)
+        quantity2 = QuantityMeasurementProblem(length2, unit2)
         with pytest.raises(QuantityMeasurementException) as exe:
-            type1 = QuantityMeasurementProblem(1)
-            type2 = QuantityMeasurementProblem(1)
-            type1 != type2
+            quantity1 == quantity2
         assert exe.value.message == 'Type Not Equal'
+
+    @pytest.mark.parametrize('length1 ,unit1, length2, unit2', [0, 'feet', 0, 'inch'])
+    def test_value_check(self, length1, unit1, length2, unit2):
+        quantity1 = QuantityMeasurementProblem(length1, unit1)
+        quantity2 = QuantityMeasurementProblem(length2, unit2)
+        with pytest.raises(QuantityMeasurementException) as exe:
+            quantity1 == quantity2
+        assert exe.value.message == 'Values Not Equal'
